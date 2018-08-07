@@ -3,6 +3,7 @@
 // - optimized for speed (tuned assembler and VIA PADLOCK optional support)
 // - this unit is a part of the freeware Synopse mORMot framework,
 // licensed under a MPL/GPL/LGPL tri-license; version 1.17
+//  bug fix by @tokomonstera  2017.03.02
 unit SynCrypto;
 
 (*
@@ -4475,13 +4476,13 @@ begin
   // validate input
   len := length(Input);
   if (len<AESBlockSize) or (len and (AESBlockSize-1)<>0) then
-    raise Exception.Create('¸Ñ½X¿ù»~');
+    raise Exception.Create('Â¸Ã‘Â½XÂ¿Ã¹Â»~');
   // decrypt
   SetLength(result,len);
   Decrypt(pointer(Input),pointer(result),len);
   // delete right padding
   if ord(result[len])>AESBlockSize then
-    raise Exception.Create('¸Ñ½X¿ù»~');
+    raise Exception.Create('Â¸Ã‘Â½XÂ¿Ã¹Â»~');
   SetLength(result,len-ord(result[len]));
 end;
 
